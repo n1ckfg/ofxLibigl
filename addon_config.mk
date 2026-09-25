@@ -6,6 +6,8 @@ meta:
 	ADDON_URL = http://github.com/kkshmz/ofxLibigl
 
 common:
+	ADDON_DEPENDENCIES = ofxEigen
+
 	ADDON_DEFINES =
 	ADDON_CFLAGS = -O3 -Wno-strict-aliasing
 
@@ -16,5 +18,4 @@ common:
 
 	# Manually add the includes and source.
 	ADDON_INCLUDES = libs/igl/include
-	ADDON_INCLUDES += libs/ofxLibigl/include
 	ADDON_INCLUDES += src

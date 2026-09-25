@@ -8,11 +8,16 @@
 #ifndef IGL_MATLAB_MEXERRMSGTXT_H
 #define IGL_MATLAB_MEXERRMSGTXT_H
 #include "../igl_inline.h"
+// Overload mexErrMsgTxt to check an assertion then print text only if
+// assertion fails
+#include "mex.h"
 namespace igl
 {
   namespace matlab
   {
-    // Wrapper for mexErrMsgTxt that only calls error if test fails
+    /// Wrapper for mexErrMsgTxt that only calls error if test fails
+    /// @param[in] test boolean expression to test
+    /// @param[in] message message to print if test fails
     IGL_INLINE void mexErrMsgTxt(bool test, const char * message);
   }
 }

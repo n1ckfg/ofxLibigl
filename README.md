@@ -1,7 +1,23 @@
 # ofxLibigl
 ### libigl - A simple C++ geometry processing library
 Will support both Libigl-legacy and Libigl as we go further
-Currently using d4b67260855fe901541f2949ff21819147c08a4d tree on master branch
+Currently using 7100764c2a2833284a8bdfa9b948d2b3bf124624 tree on main branch (2026-09-04), tested with openFrameworks 0.12.1
+
+### Requirements
+- [ofxEigen](https://github.com/n1ckfg/ofxEigen), providing Eigen 5.0.1 (the version libigl pins) in `ofxEigen/libs/eigen3/include`. Its `scripts/formulas/eigen3.sh` formula fetches that version.
+
+### Usage
+Include `ofxLibigl.h`. openFrameworks defines `PI` and `TWO_PI` as macros, which clash with libigl, so wrap any additional igl headers like this:
+
+```cpp
+#pragma push_macro("PI")
+#pragma push_macro("TWO_PI")
+#undef PI
+#undef TWO_PI
+#include <igl/solid_angle.h>
+#pragma pop_macro("TWO_PI")
+#pragma pop_macro("PI")
+```
 
 ![](https://github.com/libigl/libigl/raw/5ff6387765fa85ca46f1a6222728e35e2b8b8961/libigl-teaser.png)
 

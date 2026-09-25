@@ -14,7 +14,7 @@
 #include "igl/doublearea.h"
 #include "igl/repdiag.h"
 
-
+#include <cassert>
 
 template <typename DerivedV, typename DerivedF, typename Scalar>
 IGL_INLINE void igl::hessian(
@@ -27,15 +27,15 @@ IGL_INLINE void igl::hessian(
     typedef typename Eigen::SparseMatrix<Scalar> SparseMat;
     typedef typename Eigen::DiagonalMatrix
                        <Scalar, Eigen::Dynamic, Eigen::Dynamic> DiagMat;
-    
+
     int dim = V.cols();
     assert((dim==2 || dim==3) &&
            "The dimension of the vertices should be 2 or 3");
-    
+
     //Construct the combined gradient matric
     SparseMat G;
-    igl::grad(Eigen::PlainObjectBase<DerivedV>(V),
-              Eigen::PlainObjectBase<DerivedF>(F),
+    igl::grad(V,
+              F,
               G, false);
     SparseMat GG(F.rows(), dim*V.rows());
     GG.reserve(G.nonZeros());
@@ -43,12 +43,12 @@ IGL_INLINE void igl::hessian(
         GG.middleCols(i*G.cols(),G.cols()) = G.middleRows(i*F.rows(),F.rows());
     SparseMat D;
     igl::repdiag(GG,dim,D);
-    
+
     //Compute area matrix
     VecXd areas;
     igl::doublearea(V, F, areas);
     DiagMat A = (0.5*areas).replicate(dim,1).asDiagonal();
-    
+
     //Compute FEM Hessian
     H = D.transpose()*A*G;
 }

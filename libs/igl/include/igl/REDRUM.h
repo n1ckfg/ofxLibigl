@@ -13,7 +13,7 @@
 // A: I guess the right way is to not use a macro but a proper function with
 // streams as input and output.
 
-// ANSI color codes for formating iostream style output
+// ANSI color codes for formatting iostream style output
 
 #ifdef IGL_REDRUM_NOOP
 
@@ -35,9 +35,17 @@
 
 #else
 
+/// Bold red colored text
+/// @param[in] X  text to color
+/// @returns colored text as "stream"
+/// #### Example:
+///
+/// \code{cpp}
+/// std::cout<<REDRUM("File "<<filename<<" not found.")<<std::endl;
+/// \endcode
+#define REDRUM(X)      "\e[1m\e[31m"<<X<<"\e[m"
 // Bold Red, etc.
 #define NORUM(X)       ""<<X<<""
-#define REDRUM(X)      "\e[1m\e[31m"<<X<<"\e[m"
 #define GREENRUM(X)    "\e[1m\e[32m"<<X<<"\e[m"
 #define YELLOWRUM(X)   "\e[1m\e[33m"<<X<<"\e[m"
 #define BLUERUM(X)     "\e[1m\e[34m"<<X<<"\e[m"

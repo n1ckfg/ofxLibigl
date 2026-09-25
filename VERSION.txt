@@ -1,6 +1,2 @@
-# This file should contain the current version number of libigl
-# World.Major.Minor
-# Anyone may increment Minor to indicate a small change.
-# Major indicates a large change or large number of changes (upload to website)
-# World indicates a substantial change or release
-1.2.1
+# libigl version bundled in libs/igl/include
+main @ 7100764c2a2833284a8bdfa9b948d2b3bf124624 (2026-09-04)
